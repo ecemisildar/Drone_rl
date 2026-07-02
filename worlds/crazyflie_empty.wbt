@@ -1,0 +1,48 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bitcraze/crazyflie/protos/Crazyflie.proto"
+
+WorldInfo {
+  title "Crazyflie Empty Space"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.45 0.32 0.83 1.28
+  position 3.0 -4.0 2.2
+  follow "Crazyflie"
+}
+TexturedBackground {
+  texture "empty_office"
+  skybox FALSE
+  skyColor [
+    0.25 0.28 0.32
+  ]
+}
+DirectionalLight {
+  direction -0.3 -0.5 -1
+  intensity 2
+}
+DEF FLOOR Solid {
+  translation 0 0 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.72 0.74 0.76
+        roughness 0.7
+        metalness 0
+      }
+      geometry DEF FLOOR_PLANE Plane {
+        size 10 10
+      }
+    }
+  ]
+  name "floor"
+  boundingObject USE FLOOR_PLANE
+  locked TRUE
+}
+Crazyflie {
+  translation 0 0 0.015
+  name "Crazyflie"
+  controller "<extern>"
+}
